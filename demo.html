@@ -1,0 +1,46 @@
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href="css/horizontal-layout.css" rel="stylesheet" />    
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="js/horizontal-layout.js"></script>
+  <script>
+    angular.module("demo", ["horizontal-layout"])
+    .controller("demoController", ["navigator", "$scope", function (navigator, $scope) {
+      $scope.new = function (i) {
+        navigator.showPanel($scope, i);
+      }
+
+      $scope.goTo = function (panel, me) {
+        if (me) navigator.hideAllButMe($scope, me);
+        navigator.showPanel($scope, panel);
+      }
+    }]);
+  </script>
+</head>
+<body ng-app="demo" ng-controller="demoController">
+  <panel-container>
+    <div style='height:100%;' class="panel-container">
+      <panel title="Demo panel" name="demo1" visible="true" can-close="false" min-size="300px" size="40vw" max-size="60vw">
+        <div class="panel-header">
+          <button class="btn btn-lg pull-right" ng-click="new('panel1')"><i class="glyphicon glyphicon-ice-lolly"></i> add panel 1</button>
+          <button class="btn btn-lg pull-right" ng-click="goTo('panel2', 'demo1')"><i class="glyphicon glyphicon-ice-lolly"></i>remove all and add panel2</button>
+          <button class="btn btn-lg pull-right" ng-click="new('panel3')"><i class="glyphicon glyphicon-ice-lolly"></i>add panel 3</button>
+        </div>
+        <div class="panel-body no-padding">
+          <div class="grid full-height" ui-grid="contextGrid" ui-grid-auto-resize></div>
+        </div>
+      </panel>
+
+      <panel title="Panel1" name="panel1" size="400px" can-grow="true"></panel>
+      <panel title="Panel2" name="panel2" size="500px" can-grow="true"></panel>
+      <panel title="Panel3" name="panel3" size="600px" can-grow="true"></panel>
+    </div>
+  </panel-container>
+</body>
+</html>
