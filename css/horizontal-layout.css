@@ -1,0 +1,108 @@
+
+.panel-divider {
+  height: 100%;
+  display: flex;
+  width: 50px;
+  overflow: hidden;
+  background-color: #8EBD43;
+  color: white;
+  margin-right: 7px;
+  box-shadow: #000 1px 1px 4px;
+  position: relative;
+}
+
+  .panel-divider span {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    display: inline;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: -110px;
+    width: 300px;
+    font-size: 1.2em;
+    color: #fff;
+    margin-top: -25px;
+    text-align: center;
+  }
+
+.panel-header {
+  height: 50px;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.panel-body {
+  height: calc(100% - 50px);
+  width: 100%;
+}
+
+
+.horizontal-scroller {
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  background-color: rgb(4, 167, 226);
+}
+
+.panel-container {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100%;
+  padding-right: 100px;
+}
+
+  .panel-container ng-include {
+    height: 100%;
+    display: flex;
+  }
+
+panel {
+  padding: 5px;
+  display: flex;
+  min-width: 200px;
+  height: 100%;
+  float: left;
+}
+
+.panel-title {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  color: #fff;
+  font-size: 24px;
+}
+
+.navigation-panel {
+  background-color: #FFF;
+  border: 1px solid #337ab7;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-shadow: #000 1px 1px 4px;
+}
+
+.navigation-panel-header {
+  height: 50px;
+  background-color: #8EBD43;
+}
+
+  .navigation-panel-header button {
+    background-color: #769C3A;
+    color: #fff;
+  }
+
+.navigation-panel-body {
+  padding: 15px;
+  height: 100%;
+  height: calc(100% - 50px);
+  width: 100%;
+  overflow-y: auto;
+}
+
+.navigation-panel.fullsize {
+  width: calc(100vw - 50px);
+}
