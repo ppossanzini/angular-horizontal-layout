@@ -112,7 +112,7 @@ angular.module("horizontal-layout", [])
             changeVisibility(true, null, n.parent);
             var scroller = angular.element(".horizontal-scroller");
             if (scope.block)
-              scroller.scrollLeft($scope.block.clone[0].offsetLeft);
+              scroller.scrollLeft(scope.block.clone[0].offsetLeft);
             else
               scroller.scrollLeft(scroller.width());
             if (scope.onShow()) scope.onShow()();
