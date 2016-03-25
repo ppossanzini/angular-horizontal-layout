@@ -48,14 +48,20 @@
   background-color: rgb(4, 167, 226);
 }
 
+
 .panel-container {
   display: flex;
   flex-flow: row nowrap;
   height: 100%;
-  padding-right: 100px;
 }
 
-  .panel-container ng-include {
+  .panel-container::after {
+    content: " ";
+    min-width: 10vw;
+    display: flex;
+  }
+
+  .panel-container ng-include, .panel-container .ng-include {
     height: 100%;
     display: flex;
   }
@@ -105,4 +111,7 @@ panel {
 
 .navigation-panel.fullsize {
   width: calc(100vw - 50px);
+}
+
+body {
 }

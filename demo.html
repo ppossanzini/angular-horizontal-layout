@@ -2,7 +2,7 @@
 <head>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link href="css/horizontal-layout.css" rel="stylesheet" />    
+  <link href="css/horizontal-layout.css" rel="stylesheet" />
   <!-- Latest compiled and minified JavaScript -->
   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
   <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -11,36 +11,67 @@
   <script src="js/horizontal-layout.js"></script>
   <script>
     angular.module("demo", ["horizontal-layout"])
-    .controller("demoController", ["navigator", "$scope", function (navigator, $scope) {
-      $scope.new = function (i) {
-        navigator.showPanel($scope, i);
-      }
-
-      $scope.goTo = function (panel, me) {
-        if (me) navigator.hideAllButMe($scope, me);
-        navigator.showPanel($scope, panel);
-      }
-    }]);
+    .controller("demoController", ["$scope", function ($scope) {
+      $scope.title = "controller1";
+    }]).
+    controller("mainController", ["$scope", function ($scope) {
+      $scope.title = "controller2";
+    }])
+    .controller("subController", ["$scope", function ($scope) {
+      $scope.title = "controller3";
+    }])
   </script>
 </head>
 <body ng-app="demo" ng-controller="demoController">
+  <style>
+    .box {
+      position: relative;
+      background-color: #fff;
+      width:100%;
+    }
+  </style>
   <panel-container>
-    <div style='height:100%;' class="panel-container">
-      <panel title="Demo panel" name="demo1" visible="true" can-close="false" min-size="300px" size="40vw" max-size="60vw">
+    <panel title="Demo panel" name="demo1" visible="true" can-close="false" min-size="300px" size="40vw" max-size="60vw" ng-controller="mainController">
+      <div class="box">
         <div class="panel-header">
-          <button class="btn btn-lg pull-right" ng-click="new('panel1')"><i class="glyphicon glyphicon-ice-lolly"></i> add panel 1</button>
-          <button class="btn btn-lg pull-right" ng-click="goTo('panel2', 'demo1')"><i class="glyphicon glyphicon-ice-lolly"></i>remove all and add panel2</button>
-          <button class="btn btn-lg pull-right" ng-click="new('panel3')"><i class="glyphicon glyphicon-ice-lolly"></i>add panel 3</button>
+          <h1>{{title}}</h1>
         </div>
         <div class="panel-body no-padding">
+          <button class="btn btn-lg pull-right" navigate-to="panel1"><i class="glyphicon glyphicon-ice-lolly"></i> open panel 1</button>
+          <button class="btn btn-lg pull-right" navigate-to="panel2"><i class="glyphicon glyphicon-ice-lolly"></i>open panel2</button>
+
           <div class="grid full-height" ui-grid="contextGrid" ui-grid-auto-resize></div>
         </div>
-      </panel>
+      </div>
+    </panel>
+    <panel title="Panel3" name="panel3" size="600px" can-grow="true" max-size="600vw">
+      <div class="box">
+        Panello 3
+        <h1>{{title}}</h1>
 
-      <panel title="Panel1" name="panel1" size="400px" can-grow="true"></panel>
-      <panel title="Panel2" name="panel2" size="500px" can-grow="true"></panel>
-      <panel title="Panel3" name="panel3" size="600px" can-grow="true"></panel>
-    </div>
+        <button class="btn btn-sm" panel="small">S</button>
+        <button class="btn btn-sm" panel="normal">N</button>
+        <button class="btn btn-sm" panel="big">B</button>
+        <button class="btn btn-sm" panel="close">x</button>
+      </div>
+    </panel>
+
+    <panel title="Panel1" name="panel1" size="400px" can-grow="true">
+      <div class="box">
+        Panello 1
+        <h1>{{title}}</h1>
+      </div>
+    </panel>
+    <panel title="Panel2" name="panel2" size="500px"  can-grow="true" ng-controller="subController">
+      <div class="box">
+        Panello 2
+        <h1>{{title}}</h1>
+        <button class="btn btn-sm" panel="close">close</button>
+        <button class="btn btn-sm" panel="normal">N</button>
+        <button class="btn btn-lg pull-right" navigate-to="panel3"><i class="glyphicon glyphicon-ice-lolly"></i>add panel 3</button>
+      </div>
+    </panel>
+
   </panel-container>
 </body>
 </html>

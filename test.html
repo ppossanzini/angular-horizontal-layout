@@ -1,0 +1,53 @@
+<html>
+    <head>
+    </head>
+<body>
+    <script>
+        
+        
+        var data = [
+  {
+    "currentWeight": 0,
+    "totalWeight": 0,
+    "stocks": [
+      {
+        "stockName": "Tramoggia sabbia",
+        "level": 0,
+        "capacity": 1000,
+        "id": "28",
+        "name": "Tramoggia sabbia",
+        "isActive": false,
+        "componentType": "MaterialStock",
+        "sequence": 0
+      },
+      {
+        "stockName": "Tramoggia ghiaia",
+        "level": 0,
+        "capacity": 2000,
+        "id": "29",
+        "name": "Tramoggia ghiaia",
+        "isActive": false,
+        "componentType": "MaterialStock",
+        "sequence": 0
+      }
+    ]}];
+    
+    
+    function deepSearch(data, filter)
+    {
+        if(filter && data)        
+        {
+            if(filter(data)) return data;
+            for(var i in data) 
+            try{ 
+                if(filter(data[i])) return data[i];
+                if(data[i] instanceof Object){ var c = deepSearch(data[i], filter); if(c) return c;}
+             }catch(e){}
+        }
+        return null;
+    }
+        
+    console.log(deepSearch(data, function(d){ return d.id == "28";}));
+    </script>
+</body>
+</html>
